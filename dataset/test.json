@@ -1,0 +1,49 @@
+[{
+    "id": "radimagenet_radiology_ai_MR_brain_normal_brain-normal026831",
+    "image": "radimagenet/images/radiology_ai/MR/brain/normal/brain-normal026831.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat anatomical features, pathological changes, and imaging characteristics are visible?"
+      },
+      {
+        "from": "template",
+        "value": "MR imaging of the brain intracranial demonstrating normal structures"
+      }
+    ],
+    "metadata": {
+      "modality": "mri",
+      "location": "brain",
+      "is_abnormal": false,
+      "content_type": "description",
+      "question_id": "description",
+      "pathology": "normal",
+      "correct_text": null
+    },
+    "dataset": "radimagenet"
+  },
+  {
+    "id": "radimagenet_radiology_ai_CT_lung_normal_lung-normal051031",
+    "image": "radimagenet/images/radiology_ai/CT/lung/normal/lung-normal051031.png",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nWhat structures and findings can be identified?"
+      },
+      {
+        "from": "template",
+        "value": "CT imaging of the lung respiratory revealing no abnormal findings"
+      }
+    ],
+    "metadata": {
+      "modality": "ct",
+      "location": "lung",
+      "is_abnormal": false,
+      "content_type": "description",
+      "question_id": "description",
+      "pathology": "normal",
+      "correct_text": null
+    },
+    "dataset": "radimagenet"
+  }
+]

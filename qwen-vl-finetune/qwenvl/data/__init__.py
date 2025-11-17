@@ -26,12 +26,19 @@ VIDEOCHATGPT = {
     "data_path": "PATH_TO_VIDEOCHATGPT_DATA",
 }
 
+TEST = {
+    "annotation_path": "/home/leo.butsanets/code/repos/Qwen3-VL/dataset/test.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+
 data_dict = {
     "cambrian_737k": CAMBRIAN_737K,
     "cambrian_737k_pack": CAMBRIAN_737K_PACK,
     "mp_doc": MP_DOC,
     "clevr_mc": CLEVR_MC,
     "videochatgpt": VIDEOCHATGPT,
+    "test": TEST,
 }
 
 
