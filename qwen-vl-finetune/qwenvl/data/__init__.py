@@ -31,6 +31,15 @@ TEST = {
     "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
 }
 
+ALIGNMENT_DATA = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/train_merged_alignment_fixed.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+INSTRUCT_DATA = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/train_merged_instruct_fixed.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
 
 data_dict = {
     "cambrian_737k": CAMBRIAN_737K,
@@ -39,6 +48,8 @@ data_dict = {
     "clevr_mc": CLEVR_MC,
     "videochatgpt": VIDEOCHATGPT,
     "test": TEST,
+    "alignment_data": ALIGNMENT_DATA,
+    "instruct_data": INSTRUCT_DATA,
 }
 
 
