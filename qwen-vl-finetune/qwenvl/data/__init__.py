@@ -41,6 +41,36 @@ INSTRUCT_DATA = {
     "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
 }
 
+LLAVAMED_INSTRUCT = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/llavamed/train_instruct.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+RADIMAGENET_INSTRUCT = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/radimagenet/train_instruct.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+KITS_INSTRUCT = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/kits_1.0/train_instruct.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+ABDOMEN_ATLAS_INSTRUCT = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/abdomen_atlas_1.0/train_instruct.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+SLAKE = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/slake/train_instruct.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
+VQA_RAD = {
+    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/vqa_rad/train_instruct.json",
+    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+}
+
 data_dict = {
     "cambrian_737k": CAMBRIAN_737K,
     "cambrian_737k_pack": CAMBRIAN_737K_PACK,
@@ -50,6 +80,12 @@ data_dict = {
     "test": TEST,
     "alignment_data": ALIGNMENT_DATA,
     "instruct_data": INSTRUCT_DATA,
+    "vqa_rad": VQA_RAD,
+    "slake": SLAKE,
+    "kits_instruct": KITS_INSTRUCT,
+    "abdomen_atlas_instruct": ABDOMEN_ATLAS_INSTRUCT,
+    "radimagenet_instruct": RADIMAGENET_INSTRUCT,
+    "llavamed_instruct": LLAVAMED_INSTRUCT
 }
 
 
