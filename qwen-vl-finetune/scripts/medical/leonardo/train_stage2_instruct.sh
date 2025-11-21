@@ -16,11 +16,11 @@
 #SBATCH --mail-user $SLURM_MAIL_USER
 #SBATCH --account=AIFAC_L07_002
 #SBATCH --partition=boost_usr_prod
-#SBATCH --nodes=1
+#SBATCH --nodes=2
 #SBATCH --ntasks-per-node=1
 #SBATCH --gres=gpu:4
 #SBATCH --cpus-per-task=24
-#SBATCH --time 24:00:00
+#SBATCH --time 00:10:00
 #SBATCH --hint=nomultithread
 
 # =====================================================================================
@@ -63,8 +63,9 @@ export DEEPSPEED_CACHE=/leonardo_work/AIFAC_L07_002/shared_cache/llavanext/deeps
 export WANDB_MODE=offline
 export OMP_NUM_THREADS=8
 export NUM_GPUS=4
-export NNODES=1
+export NNODES=$SLURM_JOB_NUM_NODES
 export RANK=0
+export MASTER_ADDR=$(scontrol show hostnames $SLURM_JOB_NODELIST | head -n 1)
 export ADDR="localhost"
 export PORT="29500"
 
@@ -72,7 +73,7 @@ export PORT="29500"
 # MODEL CONFIGURATION
 # =====================================================================================
 # Language model configuration
-LLM_VERSION=lingshu-medical-mllm/Lingshu-7B  # Using HuggingFace model ID
+LLM_VERSION="lingshu-medical-mllm/Lingshu-7B"  # Using HuggingFace model ID
 LLM_VERSION_CLEAN="${LLM_VERSION//\//-}"
 
 # =====================================================================================
@@ -80,14 +81,15 @@ LLM_VERSION_CLEAN="${LLM_VERSION//\//-}"
 # =====================================================================================
 # Training hyperparameters
 LR=1e-5
-BATCH_SIZE=1
+VISION_TOWER_LR=1e-6
+BATCH_SIZE=2
 GRAD_ACCUM_STEPS=4
 
 # =====================================================================================
 # DATA CONFIGURATION
 # =====================================================================================
 # Data paths and processing
-DATASETS=datasets=llavamed_instruct,kits_instruct,abdomen_atlas_instruct,radimagenet_instruct,vqa_rad,slake
+DATASETS=llavamed_instruct,kits_instruct,abdomen_atlas_instruct,radimagenet_instruct,vqa_rad,slake
 
 
 # =====================================================================================
@@ -116,28 +118,29 @@ echo "==========================================================================
 # for 7b model we recommend bs=1, accum=2, 16 nodes, 128 gpus, lr=1e-5, warmup=0.03
 # for 72b model we recommend bs=1, accum=1, 32 nodes, 256 gpus, lr=1e-5, warmup=0.03
 
-torchrun --nproc_per_node="${NUM_GPUS}" --nnodes="${NNODES}" --node_rank="${RANK}" --master_addr="${ADDR}" --master_port="${PORT}" \
+srun torchrun --nproc_per_node="${NUM_GPUS}" --nnodes="${NNODES}"  --rdzv-id=$SLURM_JOB_ID  --rdzv-backend=c10d --rdzv-endpoint=$MASTER_ADDR:$PORT \
     qwenvl/train/train_qwen.py \
-    --deepspeed ${DEEPSPEED} \
-    --model_name_or_path "${LLM_VERSION}" \
-    --dataset_use ${datasets} \
+    --deepspeed scripts/zero3.json \
+    --model_name_or_path ${LLM_VERSION} \
+    --dataset_use ${DATASETS} \
     --data_flatten True \
-    --tune_mm_vision False \
+    --tune_mm_vision True \
     --tune_mm_mlp True \
-    --tune_mm_llm False \
+    --tune_mm_llm True \
     --bf16 \
-    --output_dir ${output_dir} \
-    --num_train_epochs 0.5 \
-    --per_device_train_batch_size ${batch_size} \
-    --per_device_eval_batch_size $((batch_size*2)) \
-    --gradient_accumulation_steps ${grad_accum_steps} \
+    --output_dir ${OUTPUT_DIR} \
+    --num_train_epochs 1 \
+    --per_device_train_batch_size ${BATCH_SIZE} \
+    --per_device_eval_batch_size $((BATCH_SIZE*2)) \
+    --gradient_accumulation_steps ${GRAD_ACCUM_STEPS} \
     --max_pixels 50176 \
     --min_pixels 784 \
     --eval_strategy "no" \
     --save_strategy "steps" \
     --save_steps 1000 \
     --save_total_limit 1 \
-    --learning_rate ${lr} \
+    --learning_rate ${LR} \
+    --vision_tower_lr ${VISION_TOWER_LR} \
     --weight_decay 0 \
     --warmup_ratio 0.03 \
     --max_grad_norm 1 \
@@ -146,6 +149,6 @@ torchrun --nproc_per_node="${NUM_GPUS}" --nnodes="${NNODES}" --node_rank="${RANK
     --model_max_length 8192 \
     --gradient_checkpointing True \
     --dataloader_num_workers 4 \
-    --run_name ${run_name} \
-    --report_to wandb"
+    --run_name ${BASE_RUN_NAME} \
+    --report_to wandb
 exit 0;
