@@ -1,5 +1,7 @@
 import re
 
+DATA_1_1_0_PATH = "/mnt/DATAFAST1/multimodal/data_1.0.0"
+
 # Define placeholders for dataset paths
 CAMBRIAN_737K = {
     "annotation_path": "PATH_TO_CAMBRIAN_737K_ANNOTATION",
@@ -26,49 +28,44 @@ VIDEOCHATGPT = {
     "data_path": "PATH_TO_VIDEOCHATGPT_DATA",
 }
 
-TEST = {
-    "annotation_path": "/home/leo.butsanets/code/repos/Qwen3-VL/dataset/test.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
-}
-
 ALIGNMENT_DATA = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/train_merged_alignment_fixed.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/train_merged_alignment_fixed.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 INSTRUCT_DATA = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/train_merged_instruct_fixed.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/train_merged_instruct_fixed.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 LLAVAMED_INSTRUCT = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/llavamed/train_instruct.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/llavamed/train_instruct.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 RADIMAGENET_INSTRUCT = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/radimagenet/train_instruct.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/radimagenet/train_instruct.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 KITS_INSTRUCT = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/kits_1.0/train_instruct.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/kits_1.0/train_instruct.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 ABDOMEN_ATLAS_INSTRUCT = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/abdomen_atlas_1.0/train_instruct.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/abdomen_atlas_1.0/train_instruct.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 SLAKE = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/slake/train_instruct.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/slake/train_instruct.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 VQA_RAD = {
-    "annotation_path": "/mnt/DATAFAST1/multimodal/data_1.1.0/vqa_rad/train_instruct.json",
-    "data_path": "/mnt/DATAFAST1/multimodal/data_1.1.0",
+    "annotation_path": f"{DATA_1_1_0_PATH}/vqa_rad/train_instruct.json",
+    "data_path": f"{DATA_1_1_0_PATH}",
 }
 
 data_dict = {
@@ -77,7 +74,6 @@ data_dict = {
     "mp_doc": MP_DOC,
     "clevr_mc": CLEVR_MC,
     "videochatgpt": VIDEOCHATGPT,
-    "test": TEST,
     "alignment_data": ALIGNMENT_DATA,
     "instruct_data": INSTRUCT_DATA,
     "vqa_rad": VQA_RAD,
